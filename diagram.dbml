@@ -1,0 +1,53 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+Table employees {
+    id integer unique [primary key]
+    firstname varchar
+    lastname varchar
+    team_id integer
+    role_id integer
+}
+
+Table roles {
+    id integer unique [primary key]
+    role varchar
+}
+
+Table teams {
+    leader_id integer
+    id integer unique [primary key]
+}
+
+Table schedules {
+    id integer unique [primary key]
+    start_date datetime
+    end_date datetime
+    team_id integer
+    mission_id integer
+}
+
+Table missions {
+    id integer unique [primary key]
+    mission varchar
+    client_id integer
+}
+
+Table clients {
+    id integer unique [primary key]
+    firstname varchar
+    lastname varchar
+    company varchar
+    location varchar
+}
+
+Ref: roles.id - employees.role_id
+
+Ref: teams.id < employees.team_id 
+
+Ref: employees.id - teams.leader_id 
+
+Ref: teams.id < schedules.team_id 
+
+Ref: missions.id - schedules.mission_id
+
+Ref: clients.id < missions.client_id
