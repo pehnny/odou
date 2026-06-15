@@ -1,0 +1,142 @@
+{
+  "version": "2.0.0",
+  "darkMode": false,
+  "gridEnabling": true,
+  "currentViewName": null,
+  "defaultView": {
+    "detailLevel": "All",
+    "tablePositions": [
+      {
+        "name": "employees",
+        "schemaName": "public",
+        "x": 456,
+        "y": 16
+      },
+      {
+        "name": "roles",
+        "schemaName": "public",
+        "x": 120,
+        "y": 144
+      },
+      {
+        "name": "teams",
+        "schemaName": "public",
+        "x": 704,
+        "y": 16
+      },
+      {
+        "name": "schedules",
+        "schemaName": "public",
+        "x": 968,
+        "y": 15
+      },
+      {
+        "name": "missions",
+        "schemaName": "public",
+        "x": 456,
+        "y": 248
+      },
+      {
+        "name": "clients",
+        "schemaName": "public",
+        "x": 120,
+        "y": 312
+      }
+    ],
+    "tableGroupCollapseStates": [],
+    "stickyNoteLayouts": [],
+    "referencePaths": [
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "roles",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "role_id"
+        ],
+        "secondTableName": "employees",
+        "secondSchemaName": "public",
+        "secondRelation": "1",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "teams",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "team_id"
+        ],
+        "secondTableName": "employees",
+        "secondSchemaName": "public",
+        "secondRelation": "*",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "employees",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "leader_id"
+        ],
+        "secondTableName": "teams",
+        "secondSchemaName": "public",
+        "secondRelation": "1",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "missions",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "mission_id"
+        ],
+        "secondTableName": "schedules",
+        "secondSchemaName": "public",
+        "secondRelation": "1",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "clients",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "client_id"
+        ],
+        "secondTableName": "missions",
+        "secondSchemaName": "public",
+        "secondRelation": "*",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "teams",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "team_id"
+        ],
+        "secondTableName": "schedules",
+        "secondSchemaName": "public",
+        "secondRelation": "*",
+        "checkPoints": []
+      }
+    ]
+  },
+  "views": {}
+}
