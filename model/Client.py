@@ -1,17 +1,18 @@
 from typing import Optional, TYPE_CHECKING
-from sqlmodel import Field, Relationship
 from sqlalchemy import Identity
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from model import BaseAgenda
+
 if TYPE_CHECKING:
     from model import Mission
 
-class Client(BaseAgenda, table=True):
+class Client(BaseAgenda):
     __tablename__ = "clients"
 
-    id: Optional[int] = Field(default=None, primary_key=True, sa_column_kwargs={"server_default": Identity(always=True)})
-    firstname: Optional[str]
-    lastname: Optional[str]
-    company: Optional[str]
-    location: Optional[str]
+    id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True)
+    firstname: Mapped[Optional[str]]
+    lastname: Mapped[Optional[str]]
+    company: Mapped[Optional[str]]
+    location: Mapped[Optional[str]]
 
-    missions: list["Mission"] = Relationship(back_populates="client")
+    missions: Mapped[list["Mission"]] = relationship(back_populates="client")

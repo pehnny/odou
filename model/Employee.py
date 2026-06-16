@@ -1,29 +1,19 @@
 from typing import Optional, TYPE_CHECKING
-from sqlmodel import Field, Relationship
-from sqlalchemy import Identity, ForeignKeyConstraint
+from sqlalchemy import Identity, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from model import BaseAgenda
+
 if TYPE_CHECKING:
     from model import Team, Role
 
-class Employee(BaseAgenda, table=True):
+class Employee(BaseAgenda):
     __tablename__ = "employees"
 
-    id: Optional[int] = Field(
-        default=None,
-        primary_key=True,
-        sa_column_kwargs={"server_default": Identity(always=True)}
-    )
-    firstname: str
-    lastname: str
-    team_id: Optional[int] = Field(default=None)
-    role_id: Optional[int] = Field(default=None)
+    id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True)
+    firstname: Mapped[str]
+    lastname: Mapped[str]
+    team_id: Mapped[Optional[int]] = mapped_column(ForeignKey("agenda.teams.id", onupdate="CASCADE", ondelete="SET NULL"))
+    role_id: Mapped[Optional[int]] = mapped_column(ForeignKey("agenda.roles.id", onupdate="CASCADE", ondelete="SET NULL"))
 
-    team: Optional["Team"] = Relationship(back_populates="employees")
-    team_leader: Optional["Team"] = Relationship(back_populates="team_leader")
-    role: Optional["Role"] = Relationship(back_populates="employees")
-
-    __table_args__ = (
-        ForeignKeyConstraint(["team_id"], ["agenda.teams.id"], onupdate="CASCADE", ondelete="SET NULL"),
-        ForeignKeyConstraint(["role_id"], ["agenda.roles.id"], onupdate="CASCADE", ondelete="SET NULL"),
-        BaseAgenda.__table_args__
-    )
+    team: Mapped[Optional["Team"]] = relationship(back_populates="employees")
+    role: Mapped[Optional["Role"]] = relationship(back_populates="employees")
