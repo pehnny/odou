@@ -5,16 +5,18 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from sqlmodel import SQLModel
-from model import *
+import model
 
-from dotenv import load_dotenv
+import dotenv
 import os
 
-load_dotenv()
+dotenv.load_dotenv()
 _database_url = os.getenv("URL")
-if _database_url == None:
-    raise ValueError()
+if _database_url is None:
+    raise ValueError("Database URL is missing !")
+_schema = os.getenv("POSTGRES_SCHEMA")
+if _schema is None:
+    raise ValueError("Schema is missing !")
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -30,7 +32,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = SQLModel.metadata
+target_metadata = model.BaseAgenda.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -77,7 +79,9 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, 
+            target_metadata=target_metadata,
+            version_table_schema=_schema
         )
 
         with context.begin_transaction():
