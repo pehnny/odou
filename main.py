@@ -1,6 +1,5 @@
+from fastapi import FastAPI
+from controller import home
 
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()
+app = FastAPI()
+app.include_router(home)
