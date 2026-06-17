@@ -9,9 +9,10 @@ from .Schedule import Schedule
 __all__ = [
     "BaseAgenda",
     "Role",
-    "Team",
+    "Employee",
     "Schedule",
     "Mission",
     "Client",
     "Employee",
+    "Team",
 ]

@@ -1,0 +1,33 @@
+from typing import Optional
+from sqlalchemy import select, delete, insert, update, exists
+from sqlalchemy.orm import Session
+from model import Team
+
+class TeamRepository:
+    @staticmethod
+    def exist(session: Session, team_id: int) -> bool:
+        query = exists(Team).where(Team.id == team_id)
+        result = session.execute(query)
+        return result
+
+    # @staticmethod
+    # def get_by_id(session: Session, team_id: int) -> Optional[Team]:
+    #     query = select(Team).where(Team.id == team_id)
+    #     team = session.execute(query).scalar()
+    #     return team
+    
+    # @staticmethod
+    # def create(session: Session, data) -> Optional[Team]:
+    #     name = data.name
+    #     team = Team(name=name)
+    #     query = insert(Team).values(name=name)
+    #     team = session.execute(query).scalar()
+    #     session.flush()
+    #     return team
+    
+    # @staticmethod
+    # def delete_by_id(session: Session, team_id: int) -> None:
+    #     query = delete(Team).where(Team.id == team_id)
+    #     session.execute(query)
+    #     session.flush()
+    #     return

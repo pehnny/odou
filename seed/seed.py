@@ -2,7 +2,7 @@ from datetime import datetime, timezone, timedelta
 
 from sqlalchemy.orm import Session
 
-from model import Client, Employee, Mission, Role, Schedule, Team
+from model import Client, Employee, Mission, Role, Schedule, Employee
 
 
 def init_seed(session: Session) -> None:
@@ -32,9 +32,9 @@ def init_seed(session: Session) -> None:
     session.add_all([c_delhaize, c_abinbev, c_beaulieu, c_etex, c_solvay, c_deme, c_kinepolis, c_ucb])
 
     # ── Équipes ────────────────────────────────────────────────────────────
-    team_alpha = Team(name="Équipe Alpha")
-    team_beta  = Team(name="Équipe Bêta")
-    team_gamma = Team(name="Équipe Gamma")
+    team_alpha = Employee(name="Équipe Alpha")
+    team_beta  = Employee(name="Équipe Bêta")
+    team_gamma = Employee(name="Équipe Gamma")
     session.add_all([team_alpha, team_beta, team_gamma])
 
     # flush : les Identity() doivent être résolus avant l'insertion des employés
@@ -152,12 +152,4 @@ def init_seed(session: Session) -> None:
     ])
 
     session.commit()
-
-
-if __name__ == "__main__":
-    from sqlalchemy.orm import Session
-    from database import engine
-
-    with Session(engine) as session:
-        init_seed(session)
-        print("Seed terminée.")
+    return

@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from model import BaseAgenda
 
 if TYPE_CHECKING:
-    from model import Team, Mission
+    from model import Employee, Mission
 
 class Schedule(BaseAgenda):
     __tablename__ = "schedules"
@@ -18,7 +18,7 @@ class Schedule(BaseAgenda):
     team_id: Mapped[int] = mapped_column(ForeignKey("agenda.teams.id", onupdate="CASCADE", ondelete="CASCADE"))
     mission_id: Mapped[int] = mapped_column(ForeignKey("agenda.missions.id", onupdate="CASCADE", ondelete="CASCADE"))
 
-    team: Mapped[Optional["Team"]] = relationship(back_populates="schedules")
+    team: Mapped[Optional["Employee"]] = relationship(back_populates="schedules")
     mission: Mapped[Optional["Mission"]] = relationship(back_populates="schedules")
 
     __table_args__ = (
