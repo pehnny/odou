@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from model import BaseAgenda
 
 if TYPE_CHECKING:
-    from model import Employee, Role
+    from model import Team, Role
 
 class Employee(BaseAgenda):
     __tablename__ = "employees"
@@ -15,5 +15,5 @@ class Employee(BaseAgenda):
     team_id: Mapped[Optional[int]] = mapped_column(ForeignKey("agenda.teams.id", onupdate="CASCADE", ondelete="SET NULL"))
     role_id: Mapped[Optional[int]] = mapped_column(ForeignKey("agenda.roles.id", onupdate="CASCADE", ondelete="SET NULL"))
 
-    team: Mapped[Optional["Employee"]] = relationship(back_populates="employees")
+    team: Mapped[Optional["Team"]] = relationship(back_populates="employees")
     role: Mapped[Optional["Role"]] = relationship(back_populates="employees")
