@@ -16,14 +16,14 @@ class TeamRepository:
         team = session.execute(query).scalar_one_or_none()
         return team
     
-    @staticmethod
-    def create(session: Session, data) -> Optional[Team]:
-        name = data.name
-        team = Team(name=name)
-        query = insert(Team).values(name=name)
-        team = session.execute(query).scalar_one_or_none()
-        session.flush()
-        return team
+    # @staticmethod
+    # def create(session: Session, data) -> Optional[Team]:
+    #     name = data.name
+    #     team = Team(name=name)
+    #     query = insert(Team).values(name=name)
+    #     team = session.execute(query).scalar_one_or_none()
+    #     session.flush()
+    #     return team
     
     @staticmethod
     def delete_by_id(session: Session, team_id: int) -> None:
