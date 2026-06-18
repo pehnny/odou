@@ -1,4 +1,4 @@
-from .employee.create import CreateEmployeeDTO, EmployeeDTO
+from .employee import CreateEmployeeDTO, EmployeeDTO
 
 __all__ = [
     "EmployeeDTO",

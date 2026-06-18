@@ -4,6 +4,7 @@ from repository import EmployeeRepository, TeamRepository
 from database import engine
 from sqlalchemy.orm import Session
 from dto import CreateEmployeeDTO, EmployeeDTO
+import traceback
 
 router = APIRouter()
 
@@ -38,17 +39,23 @@ def fire_employee(employee_id: int) -> bool:
             return False
     return True
 
-@router.patch("/employee/{emmployee_id}/team/{team_id}")
+@router.patch("/employee/{employee_id}/team/{team_id}", response_model=EmployeeDTO)
 def change_employee_team(employee_id: int, team_id: int) -> Optional[EmployeeDTO]:
+    response = None
     with Session(engine) as session:
         try:
-            team = TeamRepository.exist(session, team_id)
-            print("*******************", team)
-            if not team:
+            is_team = TeamRepository.exist(session, team_id)
+            if not is_team:
                 raise ValueError("Team does not exist !")
+            
             employee = EmployeeRepository.update_team(session, employee_id, team_id)
+            if employee is None:
+                raise TypeError("Employee not found !")
+            
+            response = EmployeeDTO.model_validate(employee, from_attributes=True)
             session.commit()
         except:
+            traceback.print_exc()
             session.rollback()
-            return None
-    return employee
+            return
+    return response

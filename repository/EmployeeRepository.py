@@ -30,7 +30,7 @@ class EmployeeRepository:
     
     @staticmethod
     def update_team(session: Session, employee_id: int, team_id: int) -> Optional[Employee]:
-        query = update(Employee).where(Employee.id == employee_id).values(team_id=team_id)
-        employee = session.execute(query)
+        query = update(Employee).where(Employee.id == employee_id).values(team_id=team_id).returning(Employee)
+        employee = session.execute(query).scalar_one_or_none()
         session.flush()
         return employee
