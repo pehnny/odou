@@ -12,7 +12,7 @@ class Client(BaseAgenda):
     id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True)
     firstname: Mapped[Optional[str]]
     lastname: Mapped[Optional[str]]
-    company: Mapped[Optional[str]]
-    location: Mapped[Optional[str]]
+    company: Mapped[str]
+    location: Mapped[str]
 
     missions: Mapped[list["Mission"]] = relationship(back_populates="client")
