@@ -1,8 +1,8 @@
-"""CREATE TABLE employees, teams, roles, schedules, missions, clients
+"""empty message
 
-Revision ID: b571e9c661bb
+Revision ID: b5c087eebc15
 Revises: 
-Create Date: 2026-06-17 08:47:47.044298
+Create Date: 2026-06-19 16:18:40.374180
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'b571e9c661bb'
+revision: str = 'b5c087eebc15'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,8 +25,8 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), sa.Identity(always=True), nullable=False),
     sa.Column('firstname', sa.String(), nullable=True),
     sa.Column('lastname', sa.String(), nullable=True),
-    sa.Column('company', sa.String(), nullable=True),
-    sa.Column('location', sa.String(), nullable=True),
+    sa.Column('company', sa.String(), nullable=False),
+    sa.Column('location', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
