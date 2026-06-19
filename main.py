@@ -3,7 +3,7 @@ from database import engine
 from seed import init_seed
 from sqlalchemy.orm import Session
 from fastapi import FastAPI
-from controller import home, employee
+from controller import home, employee, team
 from pathlib import Path
 import traceback
 from database import engine
@@ -25,3 +25,4 @@ with Session(engine) as session:
 app = FastAPI()
 app.include_router(home)
 app.include_router(employee)
+app.include_router(team)
