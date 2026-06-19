@@ -90,3 +90,27 @@ def change_employee_role(employee_id: int, role_id: int) -> Optional[EmployeeDTO
             session.rollback()
             return
     return response
+
+@router.get("/employee/team/{team_id}")
+def get_employee_by_team_id(team_id: int) -> Optional[list[EmployeeDTO]]:
+    with Session(engine) as session:
+        try:
+            team = TeamRepository.get_by_id(session, team_id)
+            if team is None:
+                return None
+            members = EmployeeRepository.select_employees_by_team(session, team)
+        except:
+            return None
+    return members
+
+@router.get("/employee/role/{role_id}")
+def get_employee_by_role_id(role_id: int) -> Optional[list[EmployeeDTO]]:
+    with Session(engine) as session:
+        try:
+            role = TeamRepository.get_by_id(session, role_id)
+            if role is None:
+                return None
+            members = EmployeeRepository.select_employees_by_role(session, role)
+        except:
+            return None
+    return members

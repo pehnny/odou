@@ -1,7 +1,7 @@
 from typing import Optional
 from sqlalchemy import select, delete, insert, update, exists
 from sqlalchemy.orm import Session
-from model import Employee
+from model import Employee, Team, Role
 from dto import CreateEmployeeDTO
 
 class EmployeeRepository:
@@ -53,3 +53,11 @@ class EmployeeRepository:
         employee = session.execute(query).scalar_one_or_none()
         session.flush()
         return employee
+    
+    @staticmethod
+    def select_employees_by_team(session: Session, team: Team) -> Optional[list[Employee]]:
+        return team.employees
+    
+    @staticmethod
+    def select_employees_by_role(session: Session, role: Role) -> Optional[list[Employee]]:
+        return role.employees
