@@ -3,6 +3,7 @@ from .team import CreateTeamDTO, TeamDTO
 from .role import CreateRoleDTO, RoleDTO
 from .client import CreateClientDTO, ClientDTO
 from .mission import CreateMissionDTO, MissionDTO
+from .schedule import CreateScheduleDTO, ScheduleDTO
 
 __all__ = [
     "EmployeeDTO",
@@ -15,6 +16,8 @@ __all__ = [
     "ClientDTO",
     "CreateMissionDTO",
     "MissionDTO",
+    "CreateScheduleDTO",
+    "ScheduleDTO",
 
 
 

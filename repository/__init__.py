@@ -3,6 +3,7 @@ from .TeamRepository import TeamRepository
 from .RoleRepository import RoleRepository
 from .ClientRepository import ClientRepository
 from .MissionRepository import MissionRepository
+from .ScheduleRepository import ScheduleRepository
 
 __all__ = [
     "EmployeeRepository",
@@ -10,4 +11,5 @@ __all__ = [
     "RoleRepository",
     "ClientRepository",
     "MissionRepository",
+    "ScheduleRepository",
 ]

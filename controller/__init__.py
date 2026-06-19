@@ -4,6 +4,7 @@ from .team.team import router as team
 from .role.role import router as role
 from .client.client import router as client
 from .mission.mission import router as mission
+from .schedule.schedule import router as schedule
 
 __all__ = [
     "home",
@@ -12,4 +13,5 @@ __all__ = [
     "role",
     "client",
     "mission",
+    "schedule",
 ]
